@@ -9,7 +9,10 @@ $(document).ready(() => {
 		let username = $("#username-input").val();
 		if (username.length > 0) {
 			socket.emit("new user", username);
+
+			currentUser = $("#username-input").val();
 			$(".username-form").remove();
+			$(".main-container").css("display", "flex");
 		}
 	});
 
@@ -36,8 +39,7 @@ $(document).ready(() => {
 	socket.on("new message", (data) => {
 		$(".message-container").append(`
         <div class="message">
-          <p class="message-user">${data.sender}: </p>
-          <p class="message-text">${data.message}</p>
+          <p class="message-user">${data.sender}: ${data.message}</p>
         </div>
       `);
 	});
