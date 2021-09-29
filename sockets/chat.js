@@ -3,4 +3,8 @@ module.exports = (io, socket) => {
 		console.log(`${username} joined the chat.`);
 		io.emit("new user", username);
 	});
+
+	socket.on("new message", (data) => {
+		io.emit("new message", data);
+	});
 };
