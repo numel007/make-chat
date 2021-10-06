@@ -4,6 +4,7 @@ $(document).ready(() => {
 	let currentUser;
 
 	socket.emit("get online users");
+
 	$("#create-user-btn").click((e) => {
 		e.preventDefault();
 
@@ -29,6 +30,16 @@ $(document).ready(() => {
 				message: message,
 			});
 			$("#chat-input").val("");
+		}
+	});
+
+	$("#new-channel-btn").click(() => {
+		let newChannel = $("#new-channel-input").val();
+
+		if (newChannel.length > 0) {
+			// Emit the new channel to the server
+			socket.emit("new channel", newChannel);
+			$("#new-channel-input").val("");
 		}
 	});
 
